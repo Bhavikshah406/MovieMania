@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="jquery.min.js"> </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- sweet alert-->
+<script src="./sweetalert2/sweetalert2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./sweetalert2/sweetalert2.min.css">
+<!--imageslider-->
+<script type="text/javascript" src="jquery.cycle.all.js"></script> 
+
+<style type="text/css">
+	#heading {	color: white;
+				font-family:"Comic Sans MS", cursive, sans-serif;
+				font-size: 50px;
+			 }
+
+	.fontstyle {
+				font-family:"Comic Sans MS", cursive, sans-serif;
+				font-size: 20px;
+	  		   }
+
+	 ul{
+			list-type: none;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+	.slider{
+ 			 margin: 0 auto;
+			 width: 280px;
+			 height: 250px;	
+			}
+
+	.slider1{
+ 			 margin: 0 auto;
+			 width: 320px;
+			 height: 250px;	
+			}
+
+	.borders {
+    		border-left: thick double black;
+		}
+</style>
+
+<script>
+
+//imageSlider
+$(document).ready(function(){
+	$('#slider1,#slider2,#slider3,#slider4').cycle({
+		fx: 'scrollRight', //'scrollLeft,scrollDown,scrollRight,scrollUp',blindX, blindY, blindZ, cover, curtainX, curtainY, fade, fadeZoom, growX, growY, none, scrollUp,scrollDown,scrollLeft,scrollRight,scrollHorz,scrollVert,shuffle,slideX,slideY,toss,turnUp,turnDown,turnLeft,turnRight,uncover,ipe ,zoom
+		speed:  'slow', 
+   		timeout: 2000 
+	});
+	$('#slider5,#slider6,#slider7').cycle({
+		fx: 'scrollUp', 
+		speed:  'slow', 
+   		timeout: 3000 
+	});
+});
+
+function showdiv()
+{
+	$("#signing").toggle('slow');
+}
+
+function signup(x)
+{
+		xhr = new XMLHttpRequest();
+		username=document.getElementById(x);
+	
+		xhr.onreadystatechange=signupstatus;
+		xhr.open("GET","checkusername.php?val=" + username.value,true);
+		xhr.send(null);
+	
+		
+}
+
+function signupstatus()
+{
+	if(xhr.readyState == 4 && xhr.status==200){
+		if(xhr.responseText=='1')
+		{
+			//alert("username already taken \n please use other username");
+			swal('username already taken\n'+'please use other username','','error');
+			username.value="";
+
+		}
+	}
+}
+
+function wrongsignin(x)
+{
+	swal(x,'','error');
+}
+
+
+function onsignup()
+{
+		
+		document.getElementById("signupusername").value="";
+		document.getElementById("signuppassword").value="";
+		document.getElementById("email").value="";
+		swal('You have been registered','','success');
+	
+}
+
+function changelocation()
+{
+	window.location.href='loggedin.html';
+}
+
+</script>
+
+<body style="background-color:#3BB9FF">
+<div class="row">
+    <div class="col-sm-4"  style="background-color:lavender; height:30px;text-align:center;" ><a class="fontstyle" id="signbutton" href="javascript:showdiv();" >SignIn / SignUp</a></div>
+    <div class="col-sm-4" style="background-color:lavenderblush;height:30px;text-align:center;"><a class="fontstyle" href="#movies" >Movies</a></div>
+    <div class="col-sm-4" style="background-color:lavender;height:30px;text-align:center;"><a class="fontstyle" href="#about" >About</a></div>
+</div>
+<h1 id="heading" align="center" >MovieMania</h1><br>
+
+<div class="row" id="signing" style="display:none">
+	
+	<div class="col-sm-6" style="background-color:green;height:300px;text-align:center;" >
+		<h2 class="fontstyle">SignIn</h2><br>
+		<form method="post" action="login.php" target="iframe">
+		<p class="fontstyle">Username : <input type="text" id="signinusername" name="uname" placeholder="username"></p><br>
+		<p class="fontstyle">Password : <input type="password" id="password" name="passwd" placeholder="password"></p><br>
+		<input type="submit" value="signin" id="signinbutton" class="fontstyle">
+		</form>
+	</div>
+    
+    <div class="col-sm-6" style="background-color:lavender;height:300px;text-align:center;">
+    	<h2 class="fontstyle">SignUp</h2><br>
+		<form method="post" action="register.php" target="iframe">
+		<p class="fontstyle">Username : <input type="text" name="uname" id="signupusername" placeholder="username"onblur="signup('signupusername')" required></p><br>
+		<p class="fontstyle">Password : <input type="password" name="passwd" id="signuppassword" placeholder="password" required></p><br>
+		<p class="fontstyle">Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" name="email" id="email" placeholder="Email" required></p><br>
+		<input type="submit" value="signup" id="signupbutton" class="fontstyle">
+		</form>
+    </div>
+
+</div><br>
+
+<div class="row" id="movies" style="height:250px;">
+	<div class="col-sm-3">
+		<div class="slider" style="height:250px;">
+		<ul id="slider1">
+			<li><img border="0" src="images/1.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/2.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/3.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="slider" style="height:250px;">
+		<ul id="slider2">
+			<li><img border="0" src="images/4.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/5.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/6.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="slider" style="height:250px;">
+		<ul id="slider3">
+			<li><img border="0" src="images/7.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/8.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/9.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="slider" style="height:250px;">
+		<ul id="slider4">
+			<li><img border="0" src="images/10.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/11.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/12.jpg" width="280" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+</div>
+<div class="row" style="height:250px;" >
+	<div class="col-sm-4">
+		<div class="slider1" style="height:250px;">
+		<ul id="slider5">
+			<li><img border="0" src="images/18.jpg" width="350"  height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/19.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/20.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="slider1" style="height:250px;">
+		<ul id="slider6">
+			<li><img border="0" src="images/12.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/13.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/14.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="slider1" style="height:250px;">
+		<ul id="slider7">
+			<li><img border="0" src="images/15.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/17.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+			<li><img border="0" src="images/11.jpg" width="350" height="250" alt="jQuery Image slider"  /></li>
+		</ul>
+		</div>
+	</div>
+</div><br>
+
+<input type="button" class="fontstyle" value="About" disabled="disabled" style="background-color: #D3D3D3;border:none"> 
+<div class="row" id="about" style="background-color:#D3D3D3;height:500;" >
+	<div class="col-sm-6" class="border" style="height:400;">
+	<center><h4 class="fontstyle">MovieMania Everywhere</h4></center>
+	<span style="padding-left:8em ;"><img src="images/googleplay.png" width="110px" height="60px" style="left:300">
+	<img src="images/appstore.png" width="110px" height="40px">
+	</div>
+	<div class="col-sm-6" class="borders" style="border-left: thick solid black;height:400;">
+	<center><h4 class="fontstyle">&nbsp;&nbsp;Follow Us On</h4></center>
+	<br>
+	<span style="padding-left:10em ;"></span><img src="images/fb.png" width="50px" height="40px">
+	&nbsp;&nbsp;<img src="images/twitter.png" width="50px" height="40px">
+	&nbsp;&nbsp;<img src="images/insta.png" width="50px" height="40px">
+	<br><br><br>
+	</div>
+</div>
+
+<iframe style="visibility: hidden" width="0px" height="0px" name="iframe">
+</body>
+
+</html>
