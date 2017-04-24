@@ -17,7 +17,8 @@
 	{
 		if($username[1]==$passwd)
 		{
-			echo "<script>","parent.changelocation();","</script>";
+			
+			echo "<script>","parent.changelocation('$username[0]','$username[1]');","</script>";
 		}
 		else
 		{
